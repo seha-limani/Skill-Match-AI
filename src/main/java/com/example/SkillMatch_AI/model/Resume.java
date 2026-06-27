@@ -1,5 +1,6 @@
 package com.example.SkillMatch_AI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 import org.hibernate.annotations.CreationTimestamp;
@@ -27,5 +28,6 @@ public class Resume {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnoreProperties({"companies", "jobs", "resumes", "experiences"})
     private User user;
 }

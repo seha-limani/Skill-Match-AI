@@ -1,6 +1,7 @@
 package com.example.SkillMatch_AI.model;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "companies")
-
+@JsonIgnoreProperties({"jobs"})
 public class Company {
 
     @Id
@@ -58,6 +59,7 @@ public class Company {
 
     @ManyToOne
     @NotNull(message = "Company owner is required")
+    @JsonIgnoreProperties({"companies", "jobs", "resumes", "experiences"})
     private User user;
 
     @OneToMany

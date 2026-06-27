@@ -1,5 +1,6 @@
 package com.example.SkillMatch_AI.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,4 +22,18 @@ public class Notification {
     private Boolean isRead;
 
     private LocalDateTime createdAt;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnoreProperties({"companies", "jobs", "resumes", "experiences", "educations", "notifications", "sentMessages", "receivedMessages", "savedJobs"})
+    private User recipient;
+
+    @PrePersist
+    void onCreate() {
+        if (isRead == null) {
+            isRead = false;
+        }
+        if (createdAt == null) {
+            createdAt = LocalDateTime.now();
+        }
+    }
 }

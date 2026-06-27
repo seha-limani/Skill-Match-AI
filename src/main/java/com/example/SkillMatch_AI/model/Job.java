@@ -3,12 +3,15 @@ package com.example.SkillMatch_AI.model;
 import com.example.SkillMatch_AI.model.Enum.ExperienceLevel;
 import com.example.SkillMatch_AI.model.Enum.JobStatus;
 import com.example.SkillMatch_AI.model.Enum.JobType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
+
+import java.time.LocalDateTime;
 
 @Data
 @Entity
@@ -37,6 +40,9 @@ public class Job {
 
     private String location;
 
+    @Column(length = 1000)
+    private String requiredSkills;
+
     @NotNull(message = "Job type is required")
     @Enumerated(EnumType.STRING)
     private JobType jobType;
@@ -49,8 +55,20 @@ public class Job {
     private ExperienceLevel experienceLevel;
 
     @ManyToOne
+    @JsonIgnoreProperties({"companies", "jobs", "resumes", "experiences"})
     private User user;
 
     @ManyToOne
+    @JsonIgnoreProperties({"user", "jobs"})
     private Company company;
+
+    private LocalDateTime createdAt;
+
+    @PrePersist
+    void onCreate() {
+        if (status == null) {
+            status = JobStatus.OPEN;
+        }
+        createdAt = LocalDateTime.now();
+    }
 }

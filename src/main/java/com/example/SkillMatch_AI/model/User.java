@@ -1,6 +1,8 @@
 package com.example.SkillMatch_AI.model;
 
 import com.example.SkillMatch_AI.model.Enum.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import lombok.Data;
@@ -10,6 +12,7 @@ import java.util.List;
 @Data
 @Entity
 @Table(name = "users")
+@JsonIgnoreProperties({"companies", "jobs", "resumes", "experiences", "educations", "notifications", "sentMessages", "receivedMessages", "savedJobs"})
 public class User {
 
     @Id
@@ -35,12 +38,9 @@ public class User {
 
 
     @NotBlank(message = "Password is required")
-    @Size(min = 8, max = 20, message = "Password must be between 8 and 20 characters")
-    @Pattern(
-            regexp = "^(?=.*[A-Z])(?=.*[a-z])(?=.*\\d).*$",
-            message = "Password must contain at least one uppercase letter, one lowercase letter, and one number"
-    )
+    @Size(min = 8, message = "Password must be at least 8 characters")
     @Column(nullable = false)
+    @JsonIgnore
     private String password;
 
 
@@ -75,4 +75,19 @@ public class User {
 
     @OneToMany
     private List<Experience> experiences;
+
+    @OneToMany
+    private List<Education> educations;
+
+    @OneToMany
+    private List<Notification> notifications;
+
+    @OneToMany
+    private List<Message> sentMessages;
+
+    @OneToMany
+    private List<Message> receivedMessages;
+
+    @OneToMany
+    private List<SavedJob> savedJobs;
 }

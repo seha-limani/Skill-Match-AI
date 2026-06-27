@@ -2,6 +2,7 @@ package com.example.SkillMatch_AI.model;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDateTime;
 
@@ -19,5 +20,12 @@ public class AIAnalysis {
 
     private String recommendations;
 
+    @CreationTimestamp
     private LocalDateTime analyzedAt;
+
+    @ManyToOne
+    private Resume resume;
+
+    @ManyToOne
+    private Job job;
 }
