@@ -1,12 +1,12 @@
 package com.example.SkillMatch_AI.controller;
 
+import com.example.SkillMatch_AI.config.JwtService;
 import com.example.SkillMatch_AI.controller.request.LoginRequest;
 import com.example.SkillMatch_AI.controller.request.UserRequest;
 import com.example.SkillMatch_AI.controller.response.AuthResponse;
 import com.example.SkillMatch_AI.controller.response.UserResponse;
 import com.example.SkillMatch_AI.model.User;
 import com.example.SkillMatch_AI.repository.UserRepository;
-import com.example.SkillMatch_AI.security.JwtService;
 import com.example.SkillMatch_AI.service.CurrentUserService;
 import com.example.SkillMatch_AI.service.UserService;
 import jakarta.validation.Valid;

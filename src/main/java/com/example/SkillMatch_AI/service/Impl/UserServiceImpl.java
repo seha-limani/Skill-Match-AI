@@ -19,6 +19,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UserServiceImpl implements UserService, UserDetailsService {
     private final UserRepository userRepository;
+    @org.springframework.context.annotation.Lazy
     private final PasswordEncoder passwordEncoder;
 
     @Override

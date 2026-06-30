@@ -1,4 +1,4 @@
-package com.example.SkillMatch_AI.security;
+package com.example.SkillMatch_AI.config;
 
 import com.example.SkillMatch_AI.model.User;
 import io.jsonwebtoken.Jwts;

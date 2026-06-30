@@ -1,4 +1,4 @@
-package com.example.SkillMatch_AI.security;
+package com.example.SkillMatch_AI.config;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

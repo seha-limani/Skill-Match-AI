@@ -27,10 +27,41 @@ export type Job = {
   matchScore?: number;
 };
 
+export type UserResponse = {
+  id: number;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone: string;
+  profileImage?: string | null;
+  bio?: string | null;
+  role: "ADMIN" | "EMPLOYER" | "JOB_SEEKER";
+};
+
+export type AuthResponse = {
+  tokenType: string;
+  accessToken: string;
+  user: UserResponse;
+};
+
 export type Resume = {
   id: number;
   fileName: string;
   extractedText: string;
+};
+
+export type Notification = {
+  id: number;
+  title: string;
+  message: string;
+  isRead: boolean;
+  createdAt?: string;
+};
+
+export type SavedJob = {
+  id: number;
+  savedAt?: string;
+  job: Job;
 };
 
 export type Application = {
@@ -39,4 +70,5 @@ export type Application = {
   matchScore?: number;
   aiSummary?: string;
   job: Job;
+  applicant?: UserResponse;
 };
